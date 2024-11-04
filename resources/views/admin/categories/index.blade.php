@@ -29,8 +29,8 @@
                     @foreach($categories as $index => $item)
                     <tr>
                         <th scope="row">{{ $categories->firstItem() + $index }}</th> <!-- Menampilkan nomor urut berdasarkan halaman -->
-                        <td>{{ $item->title }}</td>
-                        <td>{{ $item->created_at }}</td>
+                        <td>{{ $item->title ?? 'Null' }}</td>
+                        <td>{{ $item->created_at ?? 'Null' }}</td>
                         <td>
                             <!-- Button to trigger modal -->
                             <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $item->id }}">

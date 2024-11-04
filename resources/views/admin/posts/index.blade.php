@@ -24,39 +24,38 @@
                         <th scope="col">Petugas</th>
                         <th scope="col">Status</th>
                         <th scope="col">Dibuat pada tanggal</th>
-
+                        <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($posts as $post)
+                    @forelse($posts as $index => $post)
                     <tr>
                         <th scope="row">{{ $index + 1 }}</th>
-                        <td>{{ $loop->literation}}</td>
-                        <td>{{ $post->title}}</td>
-                        <td>{{ $post->category->title}}</td>
-                        <td>{{ $post->user->name}}</td>
-                        <td>{{ $post->status}}</td>
-                        <td>{{ $post->created_at}}</td>
+                        <td>{{ $post->title }}</td>
+                        <td>{{ $post->category->title ?? 'Tidak ada kategori' }}</td>
+                        <td>{{ $post->user->name ?? 'Tidak ada petugas' }}</td>
                         <td>
-
                             @if (Str::lower($post->status) == 'publish')
-                            <span class="badge bg-succes text-white">{{ Str::lcfirst ($post->status) }}</span>
+                                <span class="badge bg-success text-white">{{ Str::lcfirst($post->status) }}</span>
                             @else
-                            <span class="badge bg-warning text-white">{{ $post->status }}</span>
+                                <span class="badge bg-warning text-white">{{ $post->status }}</span>
                             @endif
                         </td>
-                        <td>{{\Carbon\Carbon::parse($post=created_at)-> format('d M Y')}}</td>
+                        <td>{{ \Carbon\Carbon::parse($post->created_at)->format('d M Y') }}</td>
                         <td class="d-flex">
-                            <a href="{{ route('posts.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('posts.destroy', $user->id) }}" method="POST" style="display:inline;">
+                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning btn-sm me-2">Edit</a>
+                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
-                            {{-- <a href="{{ route('posts.show', $user->id) }}" class="btn btn-info btn-sm">View</a> --}}
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="7" class="text-center">Tidak ada data tersedia</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

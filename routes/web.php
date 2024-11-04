@@ -60,8 +60,6 @@ Route::prefix('admin/categories')->group(function () {
 
 
 //route untuk crud post
-Route::resource('posts', PostController::class);
-
-
-
-
+Route::middleware('auth')->group(function () {
+    Route::resource('posts', PostController::class);
+});

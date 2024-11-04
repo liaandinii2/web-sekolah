@@ -21,6 +21,29 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return view('admin.categories.create', [
+            'title' => 'Tambah Kategori'
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        // Validasi data yang diterima
+        $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+
+        // Membuat kategori baru
+        Category::create([
+            'title' => $request->title,
+        ]);
+
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil ditambahkan');
+    }
+
+
 
     /**
      * Update the specified resource in storage.
