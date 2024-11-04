@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('created_at', 'DESC')->get();
+        $users = User::orderBy('created_at', 'DESC')->paginate(5);
 
         return view('admin.manajemen-admin.index', [
             'title' => 'Manajemen Admin',

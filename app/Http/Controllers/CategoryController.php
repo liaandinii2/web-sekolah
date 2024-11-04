@@ -12,7 +12,6 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // Menampilkan 10 kategori per halaman
         $categories = Category::paginate(3);
 
         return view('admin.categories.index', [
@@ -30,12 +29,10 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi data yang diterima
         $request->validate([
             'title' => 'required|string|max:255',
         ]);
 
-        // Membuat kategori baru
         Category::create([
             'title' => $request->title,
         ]);
@@ -50,20 +47,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validasi data yang diterima
         $request->validate([
             'title' => 'required|string|max:255',
         ]);
 
-        // Mencari kategori berdasarkan ID
         $category = Category::findOrFail($id);
 
-        // Update data kategori
         $category->update([
             'title' => $request->title,
         ]);
 
-        // Kembali ke halaman index dengan pesan sukses
         return redirect()->route('categories.index')->with('success', 'Kategori berhasil diperbarui');
     }
 
