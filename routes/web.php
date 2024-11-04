@@ -6,6 +6,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,7 +58,10 @@ Route::prefix('admin/categories')->group(function () {
     Route::delete('/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 })->middleware('auth');
 
+
 //route untuk crud post
 Route::resource('posts', PostController::class);
+
+
 
 

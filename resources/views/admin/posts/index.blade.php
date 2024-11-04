@@ -38,6 +38,15 @@
                         <td>{{ $post->status}}</td>
                         <td>{{ $post->created_at}}</td>
                         <td>
+
+                            @if (Str::lower($post->status) == 'publish')
+                            <span class="badge bg-succes text-white">{{ Str::lcfirst ($post->status) }}</span>
+                            @else
+                            <span class="badge bg-warning text-white">{{ $post->status }}</span>
+                            @endif
+                        </td>
+                        <td>{{\Carbon\Carbon::parse($post=created_at)-> format('d M Y')}}</td>
+                        <td class="d-flex">
                             <a href="{{ route('posts.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form action="{{ route('posts.destroy', $user->id) }}" method="POST" style="display:inline;">
                                 @csrf
