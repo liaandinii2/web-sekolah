@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMKN 4 Bogor | Landing Page</title>
+    <title>SMKN 4 BOGOR | Landing Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/logo-smkn4.jpg">
@@ -14,7 +14,7 @@
     <!-- Navbar -->
     <header class="bg-white shadow-sm p-3">
         <div class="container d-flex justify-content-between align-items-center">
-            <h1 class="h5 mb-0">SMKN 4 Bogor</h1>
+            <h1 class="h5 mb-0">SMKN 4 BOGOR</h1>
             <nav>
                 <ul class="nav">
                     <li class="nav-item"><a href="#" class="nav-link">Beranda</a></li>
@@ -30,7 +30,7 @@
     <section class="hero container my-4">
         <div class="hero-content text-center">
             <h1>Selamat Datang Di Website SMKN 4 BOGOR</h1>
-            <p>Akhlak Terpuji Ilmu Teruji Terampil Dan Teruji.</p>
+            <p>AKHLAK terpuji ILMU terkaji TERAMPIL dan Teruji.</p>
         </div>
     </section>
 
@@ -47,7 +47,7 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title mt-4">SMKN 4 BOGOR</h5>
-                        <p class="card-text">KR4BAT (Kejuruan Empat Hebat)<br>AKHLAK Terpuji ILMU Teruji TERAMPIL Dan Teruji</p>
+                        <p class="card-text">KR4BAT (Kejuruan Empat Hebat)<br>AKHLAK terpuji ILMU terkaji TERAMPIL dan Teruji</p>
                         <p><a href="#" style="text-decoration: none; color: #007bff;">Kontak Kami</a></p>
                         <div class="mt-3">
                             <a href="#" class="me-2"><i class="fab fa-facebook" style="font-size: 1.25rem; color: gray;"></i></a>
@@ -169,7 +169,7 @@
                         </button> --}}
                     </div>
                 @endif    
-                    <<!-- Latest News Section -->
+                    <!-- Latest News Section -->
                     <h3 class="mb-4">Informasi Terkini</h3>
                     @if($latestNewsPosts->isEmpty())
                         <p>Tidak ada data tersedia.</p>
