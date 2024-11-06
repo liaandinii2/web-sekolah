@@ -3,16 +3,26 @@
 
 <div class="container">
     <div class="card">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card-body">
-            <form action="{{ route('users.store') }}" method="POST">
+            <form action="{{ route('petugas.store') }}" method="POST">
                 @csrf
                 <div class="form-group mb-3">
-                    <label for="nama">Nama</label>
-                    <input type="text" name="name" class="form-control" id="name" required>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="nama">Email</label>
-                    <input type="email" name="email" class="form-control" id="email" required>
+                    <label for="username">Username</label>
+                    <input type="text" name="username" class="form-control" id="username" required>
                 </div>
                 <div class="form-group mb-3">
                     <label for="nama">Password</label>

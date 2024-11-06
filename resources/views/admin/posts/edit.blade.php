@@ -8,17 +8,17 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group mb-3">
-                    <label for="title">Judul</label>
-                    <input type="text" name="title" class="form-control" id="title" value="{{ $post->title }}" required>
+                    <label for="judul">Judul</label>
+                    <input type="text" name="judul" class="form-control" id="judul" value="{{ $post->judul }}" required>
                 </div>
                 
                 <div class="form-group mb-3">
-                    <label for="category_id">Kategori</label>
-                    <select name="category_id" id="category_id" class="form-control" required>
+                    <label for="kategori_id">Kategori</label>
+                    <select name="kategori_id" id="kategori_id" class="form-control" required>
                         <option value="">Pilih kategori</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ $post->category_id == $category->id ? 'selected' : '' }}>
-                                {{ $category->title }}
+                        @foreach ($categories as $kategori)
+                            <option value="{{ $kategori->id }}" {{ $post->kategori_id == $kategori->id ? 'selected' : '' }}>
+                                {{ $kategori->judul }}
                             </option>
                         @endforeach
                     </select>
@@ -34,8 +34,8 @@
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="content">Isi</label>
-                    <textarea name="content" id="content" class="form-control" required>{{ $post->content }}</textarea>
+                    <label for="isi">Isi</label>
+                    <textarea name="isi" id="isi" class="form-control" required>{{ $post->isi }}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary d-block mt-3">Simpan</button>

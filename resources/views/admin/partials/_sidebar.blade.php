@@ -14,37 +14,51 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Menu</span>
                     </li>
-
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('users.index') }}"
+                            <a class="sidebar-link" href="{{ route('petugas.index') }}"
                                 aria-expanded="false">
                                 <i data-feather="users" class="feather-icon"></i>
                                 <span
-                                    class="hide-menu">Manajemen Admin</span>
+                                    class="hide-menu"> MANAJEMEN ADMIN
+                                </span>
                             </a>
                         </li>
-
-
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('categories.index') }}"
+                            <a class="sidebar-link" href="{{ route('kategori.index') }}"
                                 aria-expanded="false">
                                 <i data-feather="layers" class="feather-icon"></i>
                                 <span
-                                    class="hide-menu">kategori post</span>
+                                    class="hide-menu"> KATEGORI
+                                </span>
                             </a>
-
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('posts.index') }}"
                                 aria-expanded="false">
                                 <i data-feather="list" class="feather-icon"></i>
                                 <span
-                                    class="hide-menu">post</span>
+                                    class="hide-menu"> POST
+                                </span>
                             </a>
                         </li>
-
-
-
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{ route('galeri.index') }}"
+                                aria-expanded="false">
+                                <i data-feather="image" class="feather-icon"></i>
+                                <span
+                                    class="hide-menu"> GALERI
+                                </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{ route('foto.index') }}"
+                                aria-expanded="false">
+                                <i data-feather="camera" class="feather-icon"></i>
+                                <span
+                                    class="hide-menu"> FOTO
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

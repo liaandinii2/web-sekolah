@@ -14,8 +14,8 @@
             <a href="{{ route('posts.create') }}" class="btn btn-primary">+ Tambah Post</a>
         </div>
 
-        <h4 class="card-title">Data Posts</h4>
-        <h6 class="card-subtitle">Di sini Anda bisa melihat data post yang tersedia.</h6>
+        <h4 class="card-title">Data Post Landing Page</h4>
+        <h6 class="card-subtitle">Di sini Anda bisa melihat data postingan yang tersedia.</h6>
 
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
@@ -34,9 +34,9 @@
                     @forelse($posts as $index => $post)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $post->title }}</td>
-                            <td>{{ $post->category->title ?? 'Tidak ada kategori' }}</td>
-                            <td>{{ $post->user->name ?? 'Tidak ada petugas' }}</td>
+                            <td>{{ $post->judul }}</td>
+                            <td>{{ $post->kategori->judul ?? 'Tidak ada kategori' }}</td>
+                            <td>{{ $post->petugas->username ?? 'Tidak ada petugas' }}</td>
                             <td>
                                 <span class="badge {{ strtolower($post->status) == 'publish' ? 'bg-success' : 'bg-warning' }} text-white">
                                     {{ ucfirst($post->status) }}

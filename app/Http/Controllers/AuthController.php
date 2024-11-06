@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -17,26 +18,27 @@ class AuthController extends Controller
     {
         // Validation
         $validateData = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'username' => 'required|string',
+            'password' => 'required|string',
         ]);
 
-        // Attempt to log in
-        if (auth()->attempt($validateData)) {
+        // Attempt to log in with the 'petugas' guard
+        if (Auth::guard('petugas')->attempt(['username' => $validateData['username'], 'password' => $validateData['password']])) {
             $request->session()->regenerate();
-            return redirect()->intended('/admin');
+            return redirect()->intended('/admin')->with('success', 'Login berhasil.');
         }
 
         // If login fails, redirect back with an error
         return back()->withErrors([
-            'email' => 'Email atau password salah!',
-        ])->onlyInput('email');
+            'username' => 'Username atau password salah!',
+        ])->onlyInput('username');
     }
+
 
     // Method to log out
     public function logout()
     {
-        auth()->logout();
+        Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
         return redirect('/login')->with('success', 'Anda telah berhasil logout.');

@@ -166,25 +166,16 @@
                                 <img src="/assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ms-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark">{{ Auth::user()->name }}</span> <i data-feather="chevron-down"
+                                        class="text-dark">{{ Auth::user()->username }}</span> <i data-feather="chevron-down"
                                         class="svg-icon"></i></span>
                             </a>
                             @endauth
 
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-right user-dd animated flipInY">
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="user"
-                                        class="svg-icon me-2 ms-1"></i>
-                                    My Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="credit-card"
-                                        class="svg-icon me-2 ms-1"></i>
-                                    My Balance</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"
-                                        class="svg-icon me-2 ms-1"></i>
-                                    Inbox</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="javascript:void(0)"><i data-feather="settings"
                                         class="svg-icon me-2 ms-1"></i>
-                                    Account Setting</a>
+                                    Profile Saya</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}"><i data-feather="power"
                                         class="svg-icon me-2 ms-1"></i>

@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FotoController;
+use App\Http\Controllers\GaleryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -20,51 +22,70 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/beranda');
 });
+Route::get('/beranda', [HomeController::class, 'index']);
 
-
-// Authentication routes
 Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
-
 Route::post('/login', [AuthController::class, 'login']);
-
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Route untuk dashboard
 Route::get('/admin', function () {
     return view('admin.dashboard.index', [
         'title' => 'Dashboard',
     ]);
-})->middleware('auth')->name('admin/dashboard');
+})->middleware('auth:petugas')->name('admin.dashboard');
 
-// Group routes with a prefix for users
-Route::prefix('admin/manajemen-admin')->group(function () {
-    Route::get('/', [UserController::class, 'index'])->name('users.index');
-    Route::get('/create', [UserController::class, 'create'])->name('users.create');
-    Route::post('/', [UserController::class, 'store'])->name('users.store');
-    Route::get('/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('/{id}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/{id}', [UserController::class, 'destroy'])->name('users.destroy');
-})->middleware('auth');
+Route::middleware('auth:petugas')->prefix('admin/manajemen-admin')->name('petugas.')->group(function () {
+    Route::get('/', [PetugasController::class, 'index'])->name('index');
+    Route::get('/create', [PetugasController::class, 'create'])->name('create');
+    Route::post('/', [PetugasController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [PetugasController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [PetugasController::class, 'update'])->name('update');
+    Route::delete('/{id}', [PetugasController::class, 'destroy'])->name('destroy');
+});
 
-//route untuk pengunjung yang sudah login
-Route::prefix('admin/categories')->group(function () {
-    Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
-    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
-    Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
-    Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-    Route::put('/{id}', [CategoryController::class, 'update'])->name('categories.update');
-    Route::delete('/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
-})->middleware('auth');
+Route::middleware('auth:petugas')->prefix('admin/kategori')->name('kategori.')->group(function () {
+    Route::get('/', [KategoriController::class, 'index'])->name('index');
+    Route::get('/create', [KategoriController::class, 'create'])->name('create');
+    Route::post('/', [KategoriController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [KategoriController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [KategoriController::class, 'update'])->name('update');
+    Route::delete('/{id}', [KategoriController::class, 'destroy'])->name('destroy');
+});
 
+Route::middleware('auth:petugas')->prefix('admin/posts')->name('posts.')->group(function () {
+    Route::get('/', [PostController::class, 'index'])->name('index');
+    Route::get('/create', [PostController::class, 'create'])->name('create');
+    Route::post('/', [PostController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [PostController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [PostController::class, 'update'])->name('update');
+    Route::delete('/{id}', [PostController::class, 'destroy'])->name('destroy');
+});
 
-//route untuk crud post
-Route::prefix('admin/posts')->group(function () {
-    Route::get('/', [PostController::class, 'index'])->name('posts.index');
-    Route::get('/create', [PostController::class, 'create'])->name('posts.create');
-    Route::post('/', [PostController::class, 'store'])->name('posts.store');
-    Route::get('/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
-    Route::put('/{id}', [PostController::class, 'update'])->name('posts.update');
-    Route::delete('/{id}',[PostController::class, 'destroy'])->name('posts.destroy');
-})->middleware('auth');
+Route::middleware('auth:petugas')->prefix('admin/galeri')->name('galeri.')->group(function () {
+    Route::get('/', [GaleryController::class, 'index'])->name('index');
+    Route::get('/create', [GaleryController::class, 'create'])->name('create');
+    Route::post('/', [GaleryController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [GaleryController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [GaleryController::class, 'update'])->name('update');
+    Route::delete('/{id}', [GaleryController::class, 'destroy'])->name('destroy');
+});
+
+Route::middleware('auth:petugas')->prefix('admin/foto')->name('foto.')->group(function () {
+    Route::get('/', [FotoController::class, 'index'])->name('index');
+    Route::get('/create', [FotoController::class, 'create'])->name('create');
+    Route::post('/', [FotoController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [FotoController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [FotoController::class, 'update'])->name('update');
+    Route::delete('/{id}', [FotoController::class, 'destroy'])->name('destroy');
+});
+
+Route::middleware('auth:petugas')->prefix('admin/profile')->name('profile.')->group(function () {
+    Route::get('/', [ProfileController::class, 'index'])->name('index');
+    Route::get('/create', [ProfileController::class, 'create'])->name('create');
+    Route::post('/', [ProfileController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [ProfileController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [ProfileController::class, 'update'])->name('update');
+    Route::delete('/{id}', [ProfileController::class, 'destroy'])->name('destroy');
+});

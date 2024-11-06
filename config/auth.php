@@ -36,6 +36,11 @@ return [
     */
 
     'guards' => [
+        'petugas' => [
+            'driver' => 'session',
+            'provider' => 'petugas',
+        ],
+        
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -60,15 +65,15 @@ return [
     */
 
     'providers' => [
+        'petugas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Petugas::class,
+        ],
+
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

@@ -9,16 +9,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Post extends Model
 {
     use HasFactory;
-    //relasi ke category one to one
-    protected $fillable = ['title', 'content', 'category_id', 'user_id', 'status' ];
-    public function category()
+
+    protected $fillable = ['judul', 'kategori_id', 'isi', 'petugas_id', 'status'];
+
+    public function kategori()
     {
-        return $this->BelongsTo(category::class);
+        return $this->belongsTo(Kategori::class);
     }
 
-    public function user()
+    public function petugas()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Petugas::class);
+    }
+
+    public function galery()
+    {
+        return $this->hasMany(Galery::class);
     }
 
 

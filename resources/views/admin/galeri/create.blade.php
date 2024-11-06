@@ -18,42 +18,43 @@
             </div>
         @endif
         <div class="card-body">
-            <form action="{{ route('posts.store') }}" method="POST">
+            <form action="{{ route('galeri.store') }}" method="POST">
                 @csrf
                 <div class="form-group mb-3">
-                    <label for="judul">Judul</label>
-                    <input type="text" name="judul" class="form-control" id="judul" required value="{{ old('judul') }}">
+                    <label for="post_id">ID POST</label>
+                    <select name="post_id" class="form-control" id="post_id" required>
+                        <option value="">Select Post</option>
+                        @foreach($posts as $post)
+                            <option value="{{ $post->id }}" {{ old('post_id') == $post->id ? 'selected' : '' }}>
+                                {{ $post->judul }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="row">
                     <div class="col">
                         <div class="form-group mb-3">
-                            <label for="kategori_id">Kategori</label>
-                            <select name="kategori_id" id="kategori_id" class="form-control" required>
-                                <option value="">Pilih Kategori</option>
-                                @foreach ($categories as $kategori)
-                                    <option value="{{ $kategori->id }}" {{ old('kategori_id') == $kategori->id ? 'selected' : '' }}>
-                                        {{ $kategori->judul }}
+                            <label for="position">Position</label>
+                            <select name="position" id="position" class="form-control" required>
+                                <option value="">Select Position</option>
+                                @for ($i = 1; $i <= 4; $i++)
+                                    <option value="{{ $i }}" {{ old('position') == $i ? 'selected' : '' }}>
+                                      {{ $i }}
                                     </option>
-                                @endforeach
+                                @endfor
                             </select>
                         </div>
                     </div>
-
                     <div class="col">
                         <div class="form-group mb-3">
                             <label for="status">Status</label>
                             <select name="status" id="status" class="form-control" required>
-                                <option value="draft" {{ old('status') == 'draft' ? 'selected' : '' }}>Draft</option>
-                                <option value="publish" {{ old('status') == 'publish' ? 'selected' : '' }}>Publish</option>
+                                <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Active</option>
+                                <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Nonactive</option>
                             </select>
                         </div>
                     </div>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="isi">Isi</label>
-                    <textarea name="isi" id="isi" class="form-control" required>{{ old('isi') }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary d-block mt-3">Simpan</button>
             </form>

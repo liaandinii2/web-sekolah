@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Kategori; // Ensure Kategori model is used for categories
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    /**
+     * Display a paginated listing of the posts.
+     */
     public function index()
     {
-        $posts = Post::with('category', 'user')->paginate(10);
+        $posts = Post::with('kategori', 'petugas')->orderBy('created_at', 'desc')->paginate(10);
 
         return view('admin.posts.index', [
             'posts' => $posts,
@@ -19,9 +22,12 @@ class PostController extends Controller
         ]);
     }
 
+    /**
+     * Show the form for creating a new post.
+     */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Kategori::all(); // Fetch all categories
 
         return view('admin.posts.create', [
             'categories' => $categories,
@@ -29,59 +35,72 @@ class PostController extends Controller
         ]);
     }
 
+    /**
+     * Store a newly created post in storage.
+     */
     public function store(Request $request)
     {
+        // Validate the request data
         $request->validate([
-            'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'status' => 'required|in:publish,draft',
-            'content' => 'required|string',
+            'judul' => 'required|string|max:255',
+            'kategori_id' => 'required|exists:kategori,id', // Ensure category exists
+            'status' => 'required|in:publish,draft', // Validate status
+            'isi' => 'required|string', // Validate content
         ]);
 
+        // Create a new post
         Post::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'category_id' => $request->category_id,
-            'user_id' => Auth::id(),
+            'judul' => $request->judul,
+            'isi' => $request->isi,
+            'kategori_id' => $request->kategori_id,
+            'petugas_id' => Auth::id(), // Automatically assign the authenticated user's ID
             'status' => $request->status,
         ]);
 
         return redirect()->route('posts.index')->with('success', 'Post berhasil ditambahkan');
     }
 
-    public function edit(Post $post)
+    /**
+     * Show the form for editing the specified post.
+     */
+    public function edit($id)
     {
-        $categories = Category::all();
+        $post = Post::findOrFail($id);
+        $categories = Kategori::all();
 
-        return view('admin.posts.edit', [
-            'post' => $post,
-            'categories' => $categories,
-            'title' => 'Edit Post',
-        ]);
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
-    public function update(Request $request, Post $post)
+    /**
+     * Update the specified post in storage.
+     */
+    public function update(Request $request, $id)
     {
+        // Validate the request data
         $request->validate([
-            'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'status' => 'required|in:publish,draft',
-            'content' => 'required|string',
+            'judul' => 'required|string|max:255',
+            'kategori_id' => 'required|exists:kategori,id', // Ensure category exists
+            'status' => 'required|in:publish,draft', // Validate status
+            'isi' => 'required|string', // Validate content
         ]);
 
-        $post->update([
-            'title' => $request->title,
-            'content' => $request->content,
-            'category_id' => $request->category_id,
+        $post = Post::findOrFail($id); // Find the post by ID or fail
+        $post->update([ // Update the post with validated data
+            'judul' => $request->judul,
+            'isi' => $request->isi,
+            'kategori_id' => $request->kategori_id,
             'status' => $request->status,
         ]);
 
         return redirect()->route('posts.index')->with('success', 'Post berhasil diperbarui');
     }
 
+    /**
+     * Remove the specified post from storage.
+     */
     public function destroy(Post $post)
     {
-        $post->delete();
+        $post->delete(); // Delete the post
 
         return redirect()->route('posts.index')->with('success', 'Post berhasil dihapus');
     }
