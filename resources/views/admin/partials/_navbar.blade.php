@@ -11,7 +11,7 @@
                         <!-- Logo icon -->
                         <a href="index.html">
                             {{-- <img src="/assets/images/freedashDark.svg" alt="" class="img-fluid"> --}}
-                            <h3>Web Galeri Sekolah</h3>
+                            <h3>Admin Panel</h3>
                         </a>
                     </div>
                     <!-- ============================================================== -->

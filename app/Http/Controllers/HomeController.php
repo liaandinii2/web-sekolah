@@ -14,7 +14,7 @@ class HomeController extends Controller
         $galleries = Galery::all();
         $agendaPosts = Post::whereHas('kategori', function ($query) {
             $query->where('judul', 'Agenda');
-        })->orderBy('created_at', 'desc')->get();
+        })->orderBy('created_at', 'desc')->limit(3)->get();
         $latestNewsPosts = Post::whereHas('kategori', function ($query) {
             $query->where('judul', 'Informasi');
         })->latest()->limit(10)->orderBy('created_at', 'desc')->get();

@@ -25,7 +25,7 @@ class AuthController extends Controller
         // Attempt to log in with the 'petugas' guard
         if (Auth::guard('petugas')->attempt(['username' => $validateData['username'], 'password' => $validateData['password']])) {
             $request->session()->regenerate();
-            return redirect()->intended('/admin')->with('success', 'Login berhasil.');
+            return redirect()->route('admin.dashboard')->with('success', 'Login berhasil.');
         }
 
         // If login fails, redirect back with an error

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\GaleryController;
 use App\Http\Controllers\HomeController;
@@ -30,11 +31,7 @@ Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/admin', function () {
-    return view('admin.dashboard.index', [
-        'title' => 'Dashboard',
-    ]);
-})->middleware('auth:petugas')->name('admin.dashboard');
+Route::get('/admin', [DashboardController::class, 'index'])->middleware('auth:petugas')->name('admin.dashboard');
 
 Route::middleware('auth:petugas')->prefix('admin/manajemen-admin')->name('petugas.')->group(function () {
     Route::get('/', [PetugasController::class, 'index'])->name('index');

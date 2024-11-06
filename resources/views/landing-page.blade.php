@@ -124,22 +124,33 @@
                                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                                     <div class="d-flex justify-content-center">
                                         @foreach($galleryChunk as $gallery)
-                                            <div class="card mx-2 position-relative" style="width: 300px; height: 320px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
-                                                <!-- Category Label at Top-Left Corner -->
-                                                <span class="badge bg-primary position-absolute top-0 start-0 m-2" style="z-index: 1;">
-                                                    {{ $gallery->post->kategori->judul ?? 'Kategori' }}
+                                            <div class="card mx-2 position-relative" style="width: 300px; height: 350px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
+                                                
+                                                <!-- Category Type Badge at Top-Right Corner -->
+                                                <span class="badge bg-primary position-absolute top-0 end-0 m-2" style="z-index: 1;">
+                                                    {{ $gallery->post->kategori->judul ?? 'Tipe Kategori' }}
                                                 </span>
-                                                <!-- Card Image with Dark Overlay -->
-                                                <div style="position: relative;">
-                                                    <img src="{{ asset('storage/' . ($gallery->fotos->first()->file ?? 'default.jpg')) }}" 
-                                                        class="card-img-top" alt="{{ $gallery->fotos->first()->judul ?? 'Gambar Galeri' }}"
-                                                        style="height: 180px; object-fit: cover; filter: brightness(70%);">
-                                                </div>
-                                                <!-- Card Body with Title and Description -->
-                                                <div class="card-body p-2 text-center mt-4">
-                                                    <h6 class="card-title">{{ Str::limit($gallery->post->judul ?? 'Judul Tidak Tersedia', 20) }}</h6>
-                                                    <p class="card-text" style="font-size: 0.9rem; color: gray;">
-                                                        {{ Str::limit($gallery->post->isi ?? 'Konten tidak tersedia', 60) }}
+
+                                                <!-- Card Image -->
+                                                <img src="{{ asset('storage/' . ($gallery->fotos->first()->file ?? 'default.jpg')) }}" 
+                                                    class="card-img-top img-fluid" 
+                                                    alt="{{ $gallery->fotos->first()->judul ?? 'Gambar Galeri' }}" 
+                                                    style="height: 180px; object-fit: cover;">
+                                                
+                                                <!-- Card Body with Title, Description -->
+                                                <div class="card-body" style="padding: 10px 15px; display: flex; flex-direction: column; justify-content: space-between;">
+                                                    <div>
+                                                        <!-- Title with Top Padding -->
+                                                        <h6 class="card-title" style="font-size: 1rem; margin-top: 10px;">
+                                                            {{ Str::limit($gallery->post->judul ?? 'Judul Tidak Tersedia', 50) }}
+                                                        </h6>
+                                                        <p class="card-text" style="font-size: 0.85rem; color: gray;">
+                                                            {{ Str::limit($gallery->post->isi ?? 'Konten tidak tersedia', 60) }}
+                                                        </p>
+                                                    </div>
+                                                    <!-- Last Updated Text -->
+                                                    <p class="card-text" style="font-size: 0.75rem; color: #6c757d; margin-top: auto;">
+                                                        <small class="text-muted">Last updated {{ $gallery->updated_at->diffForHumans() ?? 'N/A' }}</small>
                                                     </p>
                                                 </div>
                                             </div>
@@ -148,17 +159,16 @@
                                 </div>
                             @endforeach
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                        {{-- <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
-                        </button>
+                        </button> --}}
                     </div>
-                @endif
-                
+                @endif    
                 <!-- Latest News Section -->
                     <h3 class="mb-4">Informasi Terkini</h3>
                     @if($latestNewsPosts->isEmpty())
