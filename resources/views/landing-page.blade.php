@@ -29,8 +29,8 @@
     <!-- Hero Section -->
     <section class="hero container my-4">
         <div class="hero-content text-center">
-            <h1>Welcome to SMKN 4 Bogor</h1>
-            <p>Preparing students with excellence in skills and character.</p>
+            <h1>Selamat Datang Di Website SMKN 4 BOGOR</h1>
+            <p>Akhlak Terpuji Ilmu Teruji Terampil Dan Teruji.</p>
         </div>
     </section>
 
@@ -46,7 +46,7 @@
                         <img src="assets/images/users/1.jpg" alt="SMKN 4 Bogor Logo" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border-radius: 50%; border: 4px solid white;">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title mt-4">SMKN 4 Bogor</h5>
+                        <h5 class="card-title mt-4">SMKN 4 BOGOR</h5>
                         <p class="card-text">KR4BAT (Kejuruan Empat Hebat)<br>AKHLAK Terpuji ILMU Teruji TERAMPIL Dan Teruji</p>
                         <p><a href="#" style="text-decoration: none; color: #007bff;">Kontak Kami</a></p>
                         <div class="mt-3">
@@ -150,7 +150,7 @@
                                                     </div>
                                                     <!-- Last Updated Text -->
                                                     <p class="card-text" style="font-size: 0.75rem; color: #6c757d; margin-top: auto;">
-                                                        <small class="text-muted">Last updated {{ $gallery->updated_at->diffForHumans() ?? 'N/A' }}</small>
+                                                        <small class="text-muted">Terakhir diupdate {{ $gallery->updated_at->diffForHumans() ?? 'N/A' }}</small>
                                                     </p>
                                                 </div>
                                             </div>
@@ -169,7 +169,7 @@
                         </button> --}}
                     </div>
                 @endif    
-                <!-- Latest News Section -->
+                    <<!-- Latest News Section -->
                     <h3 class="mb-4">Informasi Terkini</h3>
                     @if($latestNewsPosts->isEmpty())
                         <p>Tidak ada data tersedia.</p>
@@ -177,7 +177,7 @@
                         <div class="row">
                             @foreach($latestNewsPosts as $news)
                                 <div class="col-md-4 mb-4">
-                                    <div class="card" style="width: 100%; height: 300px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
+                                    <div class="card" style="width: 100%; height: 340px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
                                         @php
                                             $imageFile = optional($news->galery->first()->fotos->first())->file ?? 'default.jpg';
                                         @endphp
@@ -189,12 +189,20 @@
                                             </div>
                                         </div>
                                         
-                                        <!-- Card Body with Excerpt -->
-                                        <div class="card-body" style="height: 150px;">
+                                        <!-- Card Body with Excerpt and "Baca selengkapnya" Link -->
+                                        <div class="card-body" style="padding: 10px 15px;">
                                             <p class="card-text" style="font-size: 0.85rem; color: gray;">
                                                 {{ Str::limit($news->isi, 70) }}
                                             </p>
-                                            <a href="#" class="text-primary">Baca selengkapnya</a>
+                                        </div>
+
+                                        <div class="mx-3 my-3">
+                                            <a href="#" class="text-primary" data-bs-toggle="modal" data-bs-target="#newsModal-{{ $news->id }}">Baca selengkapnya</a>
+                                        </div>
+
+                                        <!-- Last Updated at the Bottom of the Card -->
+                                        <div class="card-footer text-muted" style="font-size: 0.75rem; padding: 8px 15px;">
+                                            Terakhir diupdate {{ $news->updated_at->diffForHumans() }}
                                         </div>
                                     </div>
                                 </div>
