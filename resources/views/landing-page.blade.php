@@ -69,13 +69,16 @@
                             @foreach($agendaPosts as $agenda)
                                 <li class="mb-3">
                                     <div class="border p-3" style="border-radius: 8px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
-                                        <h5 class="card-title">{{ $agenda->judul }}</h5>
-                                        <p class="card-text">{{ Str::limit($agenda->isi, 100, '...') }}</p>
-                                        <span class="badge bg-primary">{{ $agenda->created_at->format('F Y') }}</span>
+                                        <h5 class="card-title">{{ $agenda->post->judul }}</h5>
+                                        <small class="text-muted">{{ Str::limit($agenda->post->isi, 100, '...') }}</small>
+                                        <div class="mt-2">
+                                            <span class="badge bg-primary">{{ $agenda->created_at->format('F Y') }}</span>
+                                        </div>
                                     </div>
                                 </li>
                             @endforeach
                         </ul>
+                        <a href="#" class="text-center d-block py-2">Lihat Agenda Selengkapnya</a>
                     @endif
                 </div>
 
@@ -89,23 +92,6 @@
                             <iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=400&amp;height=300&amp;hl=en&amp;q=smkn 4 bogor&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
                             <a href="https://sprunkin.com/">Sprunki</a>
                         </div>
-                        <style>
-                            .mapouter {
-                                position: relative;
-                                text-align: right;
-                                width: 100%;
-                                height: 300px;
-                            }
-                            .gmap_canvas {
-                                overflow: hidden;
-                                background: none!important;
-                                width: 100%;
-                                height: 300px;
-                            }
-                            .gmap_iframe {
-                                height: 300px!important;
-                            }
-                        </style>
                     </div>
                     <a href="#" class="text-center d-block py-2">Lihat peta lebih besar</a>
                 </div>
@@ -113,6 +99,7 @@
 
             <!-- Main Content Section -->
             <section class="col-md-8">
+
                 <!-- Gallery Section -->
                 <h3 class="mt-0 mb-4">Galeri Kegiatan Sekolah</h3>
                 @if($galleries->isEmpty())
@@ -167,46 +154,49 @@
                         </button>
                     </div>
                 @endif
-                    <!-- Latest News Section -->
-                    <h3 class="mb-4">Informasi Terkini</h3>
-                    @if($latestNewsPosts->isEmpty())
-                        <p>Tidak ada data tersedia.</p>
-                    @else
-                        <div class="row">
-                            @foreach($latestNewsPosts as $news)
-                                <div class="col-md-4 mb-4">
-                                    <div class="card" style="width: 100%; height: 340px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
-                                        @php
-                                            $imageFile = optional($news->galery->first()->fotos->first())->file ?? 'default.jpg';
-                                        @endphp
-                                        <!-- Card Image with Dark Overlay -->
-                                        <div style="position: relative; height: 150px;">
-                                            <img src="{{ asset('storage/' . $imageFile) }}" class="card-img-top" alt="{{ $news->judul }}" style="height: 100%; width: 100%; object-fit: cover; filter: brightness(70%);">
-                                            <div class="position-absolute bottom-0 start-0 text-white p-2" style="background: rgba(0, 0, 0, 0.5); width: 100%;">
-                                                <h5 class="card-title mb-0" style="font-size: 1rem;">{{ $news->judul }}</h5>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Card Body with Excerpt and "Baca selengkapnya" Link -->
-                                        <div class="card-body" style="padding: 10px 15px;">
-                                            <p class="card-text" style="font-size: 0.85rem; color: gray;">
-                                                {{ Str::limit($news->isi, 70) }}
-                                            </p>
-                                        </div>
 
-                                        <div class="mx-3 my-3">
-                                            <a href="#" class="text-primary" data-bs-toggle="modal" data-bs-target="#newsModal-{{ $news->id }}">Baca selengkapnya</a>
-                                        </div>
-
-                                        <!-- Last Updated at the Bottom of the Card -->
-                                        <div class="card-footer text-muted" style="font-size: 0.75rem; padding: 8px 15px;">
-                                            Terakhir diupdate {{ $news->updated_at->diffForHumans() }}
+                <!-- Latest News Section -->
+                <h3 class="mb-4">Informasi Terkini</h3>
+                @if($latestNewsPosts->isEmpty())
+                    <p>Tidak ada data tersedia.</p>
+                @else
+                    <div class="row">
+                        @foreach($latestNewsPosts as $news)
+                            <div class="col-md-4 mb-4">
+                                <div class="card" style="width: 100%; height: 340px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
+                                    @php
+                                        // Cek apakah ada foto pertama
+                                        $imageFile = $news->firstFoto ? $news->firstFoto->file : 'default.jpg';
+                                    @endphp
+                                    <!-- Card Image with Dark Overlay -->
+                                    <div style="position: relative; height: 150px;">
+                                        <img src="{{ asset('storage/' . $imageFile) }}" class="card-img-top" alt="{{ $news->post->judul }}" style="height: 100%; width: 100%; object-fit: cover; filter: brightness(70%);">
+                                        <div class="position-absolute bottom-0 start-0 text-white p-2" style="background: rgba(0, 0, 0, 0.5); width: 100%;">
+                                            <h5 class="card-title mb-0" style="font-size: 1rem;">{{ $news->post->judul }}</h5>
                                         </div>
                                     </div>
+
+                                    <!-- Card Body with Excerpt and "Baca selengkapnya" Link -->
+                                    <div class="card-body" style="padding: 10px 15px;">
+                                        <p class="card-text" style="font-size: 0.85rem; color: gray;">
+                                            {{ Str::limit($news->post->isi, 70) }}
+                                        </p>
+                                    </div>
+
+                                    <div class="mx-3 my-3">
+                                        <a href="#" class="text-primary" data-bs-toggle="modal" data-bs-target="#newsModal-{{ $news->id }}">Baca selengkapnya</a>
+                                    </div>
+
+                                    <!-- Last Updated at the Bottom of the Card -->
+                                    <div class="card-footer text-muted" style="font-size: 0.75rem; padding: 8px 15px;">
+                                        Terakhir diupdate {{ $news->updated_at->diffForHumans() }}
+                                    </div>
                                 </div>
-                            @endforeach
-                        </div>
-                    @endif
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
             </section>
         </div>
     </div>

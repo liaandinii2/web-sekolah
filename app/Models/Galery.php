@@ -13,9 +13,10 @@ class Galery extends Model
 
     protected $fillable = ['post_id', 'position', 'status'];
 
+    // Galery.php
     public function post()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Post::class, 'post_id');
     }
 
     public function fotos()

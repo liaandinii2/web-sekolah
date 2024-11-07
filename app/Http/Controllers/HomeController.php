@@ -11,24 +11,36 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $galleries = Galery::where('status', 1)->get();
+        // Mendapatkan data Galeri dengan kategori 'Galeri'
+        $galleries = Galery::whereHas('post.kategori', function ($query) {
+            $query->where('judul', 'Galeri');
+        })
+        ->where('status', 1)
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-        $agendaPosts = Post::whereHas('kategori', function ($query) {
+        // Mendapatkan data Galeri dengan kategori 'Agenda'
+        $agendaPosts = Galery::whereHas('post.kategori', function ($query) {
             $query->where('judul', 'Agenda');
         })
-        ->where('status', 'publish')
+        ->where('status', 1)
         ->orderBy('created_at', 'desc')
         ->limit(3)
         ->get();
 
-        $latestNewsPosts = Post::whereHas('kategori', function ($query) {
+        // Mendapatkan data Galeri dengan kategori 'Informasi'
+        $latestNewsPosts = Galery::whereHas('post.kategori', function ($query) {
             $query->where('judul', 'Informasi');
         })
-        ->where('status', 'publish')
+        ->where('status', 1)
         ->latest()
         ->limit(6)
-        ->orderBy('created_at', 'desc')
-        ->get();
+        ->get()
+        ->map(function ($galery) {
+            // Pastikan ada foto yang terkait
+            $galery->firstFoto = $galery->fotos()->first();
+            return $galery;
+        });
 
         return view('landing-page', compact('galleries', 'agendaPosts', 'latestNewsPosts'));
     }

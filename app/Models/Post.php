@@ -14,7 +14,7 @@ class Post extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class);
+        return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 
     public function petugas()
@@ -26,6 +26,5 @@ class Post extends Model
     {
         return $this->hasMany(Galery::class);
     }
-
 
 }
