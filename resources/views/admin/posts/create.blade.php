@@ -33,7 +33,7 @@
                                 <option value="">Pilih Kategori</option>
                                 @foreach ($categories as $kategori)
                                     <option value="{{ $kategori->id }}" {{ old('kategori_id') == $kategori->id ? 'selected' : '' }}>
-                                        {{ $kategori->judul }}
+                                        {{ $kategori->judul }} Sekolah
                                     </option>
                                 @endforeach
                             </select>
