@@ -22,4 +22,5 @@ class Galery extends Model
     {
         return $this->hasMany(Foto::class);
     }
+    
 }

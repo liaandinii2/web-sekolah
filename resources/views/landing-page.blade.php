@@ -114,7 +114,7 @@
             <!-- Main Content Section -->
             <section class="col-md-8">
                 <!-- Gallery Section -->
-                <h3 class="mt-0 mb-4">Galeri Kegiatan</h3>
+                <h3 class="mt-0 mb-4">Galeri Kegiatan Sekolah</h3>
                 @if($galleries->isEmpty())
                     <p>Tidak ada data tersedia.</p>
                 @else
@@ -125,18 +125,16 @@
                                     <div class="d-flex justify-content-center">
                                         @foreach($galleryChunk as $gallery)
                                             <div class="card mx-2 position-relative" style="width: 300px; height: 350px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
-                                                
                                                 <!-- Category Type Badge at Top-Right Corner -->
                                                 <span class="badge bg-primary position-absolute top-0 end-0 m-2" style="z-index: 1;">
                                                     {{ $gallery->post->kategori->judul ?? 'Tipe Kategori' }}
                                                 </span>
-
                                                 <!-- Card Image -->
                                                 <img src="{{ asset('storage/' . ($gallery->fotos->first()->file ?? 'default.jpg')) }}" 
                                                     class="card-img-top img-fluid" 
                                                     alt="{{ $gallery->fotos->first()->judul ?? 'Gambar Galeri' }}" 
-                                                    style="height: 180px; object-fit: cover;">
-                                                
+                                                    style="height: 180px; object-fit: cover;"
+                                                >
                                                 <!-- Card Body with Title, Description -->
                                                 <div class="card-body" style="padding: 10px 15px; display: flex; flex-direction: column; justify-content: space-between;">
                                                     <div>
@@ -159,16 +157,16 @@
                                 </div>
                             @endforeach
                         </div>
-                        {{-- <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
-                        </button> --}}
+                        </button>
                     </div>
-                @endif    
+                @endif
                     <!-- Latest News Section -->
                     <h3 class="mb-4">Informasi Terkini</h3>
                     @if($latestNewsPosts->isEmpty())
@@ -212,7 +210,6 @@
             </section>
         </div>
     </div>
-
     <!-- Footer -->
     <footer class="bg-dark text-white mt-5">
         <div class="container py-4">
