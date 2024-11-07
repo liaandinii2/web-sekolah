@@ -46,9 +46,9 @@
                     <div>
                         <div class="d-inline-flex align-items-center">
                             <h2 class="text-dark mb-1 font-weight-medium">{{ $galeriCount }}</h2>
-                            <span class="badge bg-danger font-12 text-white font-weight-medium rounded-pill ms-2 d-md-none d-lg-block">
+                            {{-- <span class="badge bg-danger font-12 text-white font-weight-medium rounded-pill ms-2 d-md-none d-lg-block">
                                 semua kategori
-                            </span>
+                            </span> --}}
                         </div>
                         <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Galeri</h6>
                     </div>
