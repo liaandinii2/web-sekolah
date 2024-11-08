@@ -16,13 +16,14 @@ class DatabaseSeeder extends Seeder
             PetugasSeeder::class,
             KategoriSeeder::class,
         ]);
-        
-        \App\Models\Post::factory(5)->create()->each(function ($post) {
-            // Membuat Galery untuk setiap Post
-            $post->galery()->saveMany(\App\Models\Galery::factory(3)->make())->each(function ($galery) {
-                // Membuat Foto untuk setiap Galery
-                $galery->fotos()->saveMany(\App\Models\Foto::factory(2)->make());
-            });
-        });
+
+        // \App\Models\Post::factory(5)->create()->each(function ($post) {
+        //     // Membuat Galery untuk setiap Post
+        //     $post->galery()->saveMany(\App\Models\Galery::factory(3)->make())->each(function ($galery) {
+        //         // Membuat Foto untuk setiap Galery
+        //         $galery->fotos()->saveMany(\App\Models\Foto::factory(2)->make());
+        //     });
+        // });
+
     }
 }

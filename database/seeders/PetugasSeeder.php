@@ -3,8 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Petugas;
 
 class PetugasSeeder extends Seeder
 {
@@ -15,22 +14,9 @@ class PetugasSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('petugas')->insert([
-            [
-                'username' => 'admin',
-                'password' => Hash::make('password123'),
-                'created_at' => now(),
-            ],
-            [
-                'username' => 'staff1',
-                'password' => Hash::make('password123'),
-                'created_at' => now(),
-            ],
-            [
-                'username' => 'staff2',
-                'password' => Hash::make('password123'),
-                'created_at' => now(),
-            ],
-        ]);
+        // Directly create specific records without using factory
+        Petugas::create(['username' => 'admin', 'password' => bcrypt('password123')]);
+        Petugas::create(['username' => 'staff1', 'password' => bcrypt('password123')]);
+        Petugas::create(['username' => 'staff2', 'password' => bcrypt('password123')]);
     }
 }

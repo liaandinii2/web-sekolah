@@ -14,7 +14,7 @@ class KategoriSeeder extends Seeder
      */
     public function run()
     {
-        // Menambahkan data contoh ke tabel kategori
+        // Directly create specific categories without using factory
         Kategori::create(['judul' => 'Informasi']);
         Kategori::create(['judul' => 'Agenda']);
         Kategori::create(['judul' => 'Galeri']);
